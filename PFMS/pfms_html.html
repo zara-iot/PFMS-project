@@ -1,0 +1,1297 @@
+<!doctype html>
+<html>
+    <head>
+        <title>PFMS</title>    
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">  
+        <meta http-equiv="expires" content="0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="shortcut icon" href="favicon.png">   
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+        <script src = "https://www.gstatic.com/charts/loader.js" defer></script>
+        <script type="text/javascript" src="meter_template.js" defer></script>
+        <script type="text/javascript" src="gauge.min.js" defer></script>             
+        <script type="text/javascript" src="pfms_core.js" defer></script>            
+
+        <style>
+            .yes_no {
+                width: 20%;
+                height:30%;                
+                background-color: rgba(0, 0, 0, 0.932);
+                position: absolute;
+                box-sizing: border-box;
+                box-shadow: 6px 8px 9px 1px #1f1f1ff1;
+                transform: translate(-50%, -50%);                
+                border-radius: 30px;
+                border: 1px solid rgba(235, 235, 235, 0.753);
+                font-family: Calibri;    
+                padding: 2% 1% 0 1%;                
+                display: none;
+                z-index: 20;
+                margin: 20% 50% 80% 50%;                
+                color: rgb(255, 255, 255);        
+            }
+                .yes {
+                    cursor: pointer; 
+                    box-sizing: border-box; 
+                    border-radius: 10px; 
+                    padding-top: 1.7%; 
+                    display: inline-block; 
+                    margin: 35% 30% 0 7%; 
+                    width: 28%; 
+                    height: 17%; 
+                    text-align: center;
+                    font-size: 1.1vw; 
+                    border:1px solid white; 
+                    background-color: #ff000079; 
+                    color: white;
+                }
+                    .yes:hover{
+                        background-color: white;
+                        color: rgb(255, 0, 0);  
+                    }
+
+                .no{
+                    cursor: pointer; 
+                    box-sizing: border-box; 
+                    border-radius: 10px; 
+                    padding-top: 1.7%; 
+                    display: inline-block; 
+                    width: 28%; 
+                    height: 17%; 
+                    text-align: center; 
+                    font-size: 1.1vw; 
+                    border:1px solid white; 
+                    background-color: #ff000079; 
+                    color: white;
+                }
+                .no:hover {
+                    background-color: white;
+                    color: rgb(255, 0, 0);
+                }
+
+            .user_name {
+                width: 20%;
+                height:34%;                
+                background-color: rgb(255, 255, 255);
+                position: absolute;
+                box-sizing: border-box;
+                box-shadow: 6px 8px 9px 1px #1f1f1fd7;
+                transform: translate(-50%, -50%);                
+                border-radius: 30px;
+                border: 1px solid rgba(36, 113, 255, 0.753);
+                font-family: Calibri;    
+                padding: 1% 0 0 1%;
+                z-index: 20;
+                margin: 20% 50% 80% 50%;                
+                color: rgb(0, 0, 0);  
+                             
+            }
+
+                .logo {
+                    width: 22%;
+                    height:28%;                
+                    background-image: url('chicken.jpg');
+                    background-size: 100% 100%;
+                    box-sizing: border-box;
+                    display:inline-block;
+                                                   
+                }
+                .logo_text {
+                    float:right;
+                    margin: 12% 22% 0 0;
+                    font-weight: bold;
+                    font-size: 1.1vw;
+                    width: fit-content;
+                    height: 10%;
+                    color: red;
+                    text-shadow:2px 1px 2px#000000ea;
+                }
+                .password {
+                    width: 75%;
+                    height: 14%;
+                    display: block;
+                    background-color: rgb(244, 250, 252);
+                    border:1px solid rgb(248, 0, 0);
+                    border-radius: 3px; 
+                    font-size: .9vw;
+                    margin: 8% 0 8% 8%;
+                    padding-left: 2%;
+                }                
+
+            .mask {
+                top: 0px;
+                left: 0px;
+                width:100%;
+                height:100%;
+                /*background-color: rgba(27, 27, 27, 0.263);*/
+                z-index: 10;
+                position: absolute;
+                background-image: url('pf.jpg');
+                background-size: 100% 100%;
+                opacity: .5;
+                /*display: none;*/
+            }
+
+            .req_config_panel {
+                width: 0%;
+                height:40%;
+                top: 50%;         
+                left: 8%;       
+                background-color: rgba(10, 10, 10, 0.952);
+                position: fixed;
+                /*padding: .5% 0 0.5% 0.5%;*/
+                box-sizing: border-box;
+                box-shadow: 6px 8px 9px 1px #1f1f1fee;
+                font-size: .9vw;
+                font-family: calibri; 
+                overflow-x: hidden;                
+                padding: 0%;           
+                display: unset; 
+                z-index: 20; 
+                transition: 1s;
+            }
+
+                .gateway_halls_files{
+                    width: 36%;
+                    height: 74%;
+                    background-color: rgb(0, 0, 0);
+                    float: left;  
+                    border: 1px solid white;                  
+                    border-radius: 10px;
+                    padding: 4%;
+                    margin: 8% 0 0 4%;
+                    
+                }
+                    .files {
+                        width: 100%;
+                        height: 10%;
+                        float: left;                    
+                        margin-bottom:3%;
+                        display: block;
+                        font-size: 1vw;
+                        color:rgb(151, 151, 151) ;  
+                        transition: 0.3s; 
+                        text-decoration: none;              
+                    }
+                    a:hover {
+                        color:#ffffff
+                    }
+               
+            #alarm_panel {
+                width: 18%;
+                height:70%;
+                top: 10%;         
+                left: 73%;       
+                background-color: rgba(255, 254, 240, 0.9);
+                position: absolute;
+                padding: .5% 0 0.5% 0.5%;
+                box-sizing: border-box;
+                box-shadow: 6px 8px 9px 1px #1f1f1fee;
+                border: 2px solid rgba(10, 10, 10, 0.753);
+                font-size: .9vw;
+                font-family: calibri;                
+                color: rgb(0, 0, 0);
+                display: none; 
+                z-index: 20;
+            }                 
+            
+            .project_main_container {
+                top:0px;
+                left: 0px;
+                width:100%;
+                height:100%;            
+                background-color: rgb(0, 0, 0);
+                position: absolute;                   
+                z-index: 1;              
+                }
+
+                .title {
+                    background:linear-gradient(to right, rgba(255, 0, 0, 0.6) 10%, rgba(0, 4, 255, 0.6) 40%, rgb(255, 0, 0, 0.6) 75%, rgb(0, 4, 255, 0.6) 100%);  
+                    color:azure;
+                    width:100%;
+                    height: 5%;
+                    box-sizing: border-box;
+                    display: block;
+                    position: relative;
+                    text-align: center;
+                    font-size:200%;
+                    box-sizing: border-box;                
+                    margin-bottom: .1%; 
+                    padding-top: .2%;  
+                    /*background-image: url('banner.jpg');
+                    background-size:contain; */                                               
+                }          
+            
+                .zone_container {
+                        background-color:rgb(26, 26, 26) ;               
+                        width:99.6%;
+                        height: 4.5%; 
+                        border-bottom: 1px rgb(94, 93, 93) solid;               
+                        display:inline-block;
+                        position:relative;                               
+                        box-sizing: border-box;                   
+                        font-family: Calibri;  
+                        margin-bottom: 0.15%;  
+                }                    
+                    .zone_button {
+                        background-color:rgb(41, 41, 41) ;               
+                        width:4.5%;
+                        height: 100%; 
+                        border-right: 1px rgb(133, 132, 132) solid;
+                        text-align: center; 
+                        color: rgb(51, 255, 51);              
+                        display: inline-block;
+                        position: relative;      
+                        font-size: 1.2vw;                         
+                        box-sizing: border-box;
+                        padding-top: .4%;
+                                   
+                    }
+                    .hall_button {
+                        background-color:rgb(41, 41, 41) ;               
+                        width:4.5%;
+                        height: 100%; 
+                        border-right: 1px rgb(133, 132, 132) solid;
+                        text-align: center; 
+                        color: rgb(51, 255, 51);              
+                        display: inline-block;
+                        position: relative;    
+                        font-size: 1.2vw;                           
+                        box-sizing: border-box;
+                        padding-top: .4%;
+                        
+                    }
+                    /*.motor {
+                        background-color:rgb(41, 41, 41) ;               
+                        width:7%;
+                        height: 100%; 
+                        border-right: 1px rgb(133, 132, 132) solid;
+                        text-align: center; 
+                        color: rgb(51, 255, 51);  
+                        float: right;
+                        margin-right: 40%;            
+                        display: none;
+                        position: relative;   
+                        font-size: 0.9vw;                            
+                        box-sizing: border-box;
+                        padding-top: .7%;
+                        padding-bottom: .7%; 
+                    }*/
+                    .download_table_button{
+                        width: 7%;
+                        height: 100%;
+                        background-color: rgb(64, 179, 74);
+                        color: white;
+                        float: right;
+                        display: none;
+                        text-align: center;
+                        padding: .5% ;
+                        box-sizing: border-box;
+                        margin-right: 0.4%;
+                        font-size: 0.8vw;
+                        cursor:pointer;
+                    }
+                    .display_table_button {
+                        width: 8%;
+                        height: 100%;
+                        background-color: rgb(33, 119, 248);
+                        color: white;
+                        float: right;
+                        display: none;
+                        text-align: center;
+                        padding: .5% ;
+                        box-sizing: border-box;
+                        margin-right: .4%;
+                        font-size: 0.8vw;
+                        cursor:pointer;
+                    }
+                    .motor_button {
+                        background-color:rgb(41, 41, 41) ;               
+                        width:fit-content;
+                        height: 100%; 
+                        border-radius: 5px;                       
+                        text-align: center; 
+                        font-size: .7vw;
+                        color: rgb(251, 255, 0);              
+                        float: right;                             
+                        box-sizing: border-box;
+                        padding-top: .7%;
+                        padding-bottom: .5%; 
+                        margin-left: .4%;
+                        display: none;
+                        cursor:pointer;
+                    }
+                    .conn_server_panel {
+                        width: 7.6%;
+                        height: 100%; 
+                        background-color: rgb(250, 248, 125);
+                        color: rgb(250, 3, 3); 
+                        text-align:left;
+                        font-size: 100%;
+                        font-weight: bold;
+                        float: right;
+                        margin-left: 0.2%; 
+                        box-sizing: border-box; 
+                        padding: 0.2% 0 0.2% 0.5%;                       
+                        bottom: 1.1%;
+                        left: 0.37%;
+                    }
+                    .system_clock {
+                        background-color:rgb(248, 2, 2) ;               
+                        width:fit-content;
+                        height: 100%; 
+                        border: 1px rgb(250, 246, 3) solid;
+                        text-align: center;  
+                        font-size: 150%;   
+                        background: linear-gradient(to bottom left, #0c0000 20%, #f02a2a 100%);                
+                        color: rgb(255, 255, 255);          
+                        float:right;   
+                        margin-left: 0.2%;                                                
+                        box-sizing: border-box;  
+                        padding: 0.3% 0.4% 0 0.4%; 
+                    }
+                    .system_state {
+                        width:10%;
+                        height: 100%; 
+                        border: 1px rgb(250, 246, 3) solid;
+                        text-align: center;  
+                        font-size: 150%;   
+                        background: linear-gradient(to bottom left, #0c0000 20%, #d84f00 100%);                
+                        color: yellow;          
+                        float:right;   
+                        margin-left: 0.2%;                                                
+                        box-sizing: border-box;  
+                        padding-top: 0.3%; 
+                    }
+                    .alarm {
+                        background-color:rgb(250, 94, 3) ;               
+                        width:fit-content;
+                        height: 100%; 
+                        border: 1px rgb(250, 246, 3) solid;
+                        text-align: center;  
+                        font-size: 150%;                   
+                        color: rgb(255, 255, 255);
+                        margin-left: 0.2%;               
+                        float: right;      
+                        box-sizing: border-box;  
+                        padding: 0.3% 0.4% 0 0.4%; 
+                        opacity: 0.4;
+                        animation-name: alarm_opacity;    
+                        animation-play-state:paused;
+                        animation-duration: 1s;
+                        animation-fill-mode:forwards;      
+                        animation-timing-function: linear; 
+                        animation-iteration-count: infinite;                  
+                    }                                      
+                    @keyframes alarm_opacity {   
+                        50% { opacity: 0; } 
+                        100%{ opacity: 1; } 
+                    }
+                    .messages {
+                        background-color:rgb(22, 22, 22) ;               
+                        width:22%;
+                        height: 100%; 
+                        border: 1px rgb(250, 246, 3) solid;
+                        text-align: left;
+                        font-size: 120%;                                    
+                        color: rgb(255, 255, 255);              
+                        float: right;                                                    
+                        box-sizing: border-box;  
+                        padding: .4% .4% 0% .4%;                        
+                        margin-left: .2%;                                              
+                    }
+                    .readings_time_stamp_b {
+                        background-color:rgb(0, 0, 0) ;               
+                        width:10%;
+                        height: 100%; 
+                        border: 1px rgb(250, 246, 3) solid;
+                        text-align: center;  
+                        font-size: 120%;                   
+                        color: rgb(255, 255, 255); 
+                        float:right;                                                   
+                        box-sizing: border-box;  
+                        padding: .4% .4% 0 .4%;
+                        display: unset; 
+                        animation-name: readings_time_stamp_b;    
+                        animation-play-state: running;
+                        animation-duration: .5s;
+                        animation-fill-mode:forwards;      
+                        animation-timing-function: linear; 
+                        animation-iteration-count: 3;                  
+                    }                     
+                    @keyframes readings_time_stamp_b {   
+                        50% { opacity: 0; } 
+                        100%{ opacity: 1; } 
+                    }
+                    .readings_time_stamp {
+                        background-color:rgb(0, 0, 0) ;               
+                        width:10%;
+                        height: 100%; 
+                        border: 1px rgb(250, 246, 3) solid;
+                        text-align: center;  
+                        font-size: 1vw;                   
+                        color: rgb(255, 255, 255); 
+                        float:right;                                                   
+                        box-sizing: border-box;  
+                        padding: .4% .4% 0 .4%;
+                        display: unset;
+                    }  
+
+                .panel {
+                    background-color:rgb(134, 134, 134) ;               
+                    width: 8%;
+                    height: 89.5%; 
+                    border: 2px rgb(56, 56, 56) solid; 
+                    color: blue;    
+                    font-family: Calibri;              
+                    float:left;   
+                    position:relative;                         
+                    box-sizing: border-box;
+                    padding: .1%;
+                    margin-right:0.2%;
+                    margin-left: 0.2%;
+                }
+                    .user_login{
+                        width: 96%;
+                        height: fit-content;
+                        background-color: rgb(250, 250, 250);
+                        box-shadow: 2px 3px 3px 1px #1f1f1ff3;
+                        color: aliceblue;
+                        font-size: .8vw;    
+                        /*text-shadow:1px 1px 1px#11111177;*/
+                        font-weight: bold;                    
+                        margin: 3% 1.5% 6% 1.5%;
+                        text-align: center;
+                        color: rgb(255, 0, 0);
+                        box-sizing: border-box;
+                        padding: 2% 1.5% 2% 1.5%;                         
+                        position: relative;  
+
+                    }
+                    .data_type_container {
+                        width: 100%;
+                        height: fit-content;
+                        background-color: rgb(0, 0, 0);
+                        border: 1px solid rgba(253, 3, 3, 0.699);
+                        color: aliceblue;
+                        font-size: .8vw;                        
+                        margin-top: 1.5%;
+                        color: rgb(113, 223, 3);
+                        border-radius:5px;
+                        box-sizing: border-box;
+                        padding: 2% 1.5% 1% 1.5%;                         
+                        position: relative;                        
+                    }
+                    .zone_selections {
+                        width:100%;
+                        height:100%;
+                        padding: 1% 0 1% 0;  
+                        background-color: rgb(0, 0, 0);
+                        margin: 6% 0 3% 0; 
+                        color:rgb(113, 223, 3);
+                        position: relative;  
+                        border: 1px solid aqua;                                     
+                    }
+                    .zone_option {
+                        height:10%; 
+                        border-bottom: 3px solid white;
+                        color: rgb(113, 223, 3);                                     
+                    }
+                    .hall_selections {
+                        width:100%;
+                        height:4.5%;
+                        padding: 1% 0 1% 0;     
+                        background-color: rgb(0, 0, 0);
+                        margin: 0 0 3% 0; 
+                        border: none;  
+                        color:rgb(113, 223, 3); 
+                        position: relative;
+                        border: 1px solid aqua;    
+                    }
+                    .hall_option {
+                        height:4%; 
+                        border:none;  
+                        color: rgb(113, 223, 3);                                      
+                    }
+                    .button {
+                        width: 100%;
+                        height: fit-content;
+                        text-align: center;
+                        background-color: rgb(1, 102, 253);
+                        color: white; 
+                        font-size: 0.8vw;
+                        margin-top: 2%;
+                        margin-bottom: 7%;
+                        cursor:pointer;
+                        position: relative;
+                        padding: 3% 0 3% 0;
+                        margin-top: 2%;
+                        box-shadow: 1px 2px 5px #000000; 
+                    }
+                    .button:hover {
+                        opacity: 0.6;
+                    }
+                    .main_switching_container {
+                        display: none;
+                    }
+                        .update_halls {
+                            width: 90%;
+                            height:fit-content;
+                            background-color: rgb(255, 0, 0);
+                            border-radius: 5px;
+                            color: rgb(255, 255, 255); 
+                            text-align:left;
+                            font-size: .7vw;
+                            text-align: center;
+                            font-weight: bold;
+                            display: block;
+                            position: relative;
+                            box-sizing: border-box;
+                            padding: 3% 6% 3% 6%;
+                            margin: auto;
+                            margin-top: 5%;
+                            cursor:pointer;                                           
+                        }
+                        .update_halls:hover {
+                        opacity: 0.6;
+                        }
+                        .switching_container {
+                            width: 100%;
+                            height: fit-content;
+                            box-sizing: border-box;
+                            background-color: rgb(0, 0, 0);
+                            border: 1px solid rgba(253, 3, 3, 0.699);
+                            color: aliceblue;
+                            font-size: .8vw;
+                            margin-bottom: 1.7%;
+                            margin-top: 5%;
+                            display: block;
+                            color: rgb(113, 223, 3);
+                            border-radius:5px;
+                            box-sizing: border-box;
+                            padding: 2.5% 1.5% 1% 1.5%;                         
+                            position: relative;                    
+                        } 
+                            .switching_button {
+                                display: block;
+                            }                     
+                    
+/*****************************************************************************************************************************************************************
+******************************************************************************************************************************************************************/
+                .hall_current_state_main_container {
+                    background-color:rgb(255, 255, 255) ;               
+                    width:91.2%;
+                    height: 89.5%; 
+                    border: 1px rgb(94, 93, 93) solid;               
+                    float:left;          
+                    display: none;                    
+                    box-sizing: border-box;
+                    padding: 0.2%;
+                } 
+                    .zone {
+                        background-color:rgb(0, 0, 0);                        
+                        width:32.9%;
+                        height: 49.1%;                
+                        float:left;                              
+                        box-sizing: border-box;  
+                        margin: 0.2% 0.2% 0.2% 0.2%;                       
+                        border: 2px solid rgb(0, 38, 255); 
+                    }
+                        .zone_label {
+                            background-color:rgb(246, 247, 222);                        
+                            width:100%;
+                            height: 8%;                
+                            float:left;  
+                            text-align: center;
+                            font-size: 1.2vw;                            
+                            box-sizing: border-box;                   
+                            padding:0.3% 0 0 .3%;
+                            color: rgb(0, 26, 255);
+                            margin-bottom: .5%;
+                            } 
+                        .hall {
+                            background-color:rgb(39, 39, 39);                        
+                            width:19%;
+                            height: 21.8%;                
+                            float:left;                              
+                            box-sizing: border-box;  
+                            margin: 0.4% 0.2% 0.3% 0.7%;                       
+                            border: 1px solid rgb(254, 255, 196); 
+                            /*padding: .8%; */                                            
+                        }
+                            .hall_water_mark {
+                                background-color:rgba(0, 0, 0, 0);                        
+                                width:5.3%;
+                                height: 8.5%;                
+                                box-sizing: border-box;  
+                                position:absolute;                                                                 
+                                color: #00eeffc4;    
+                                text-align: center; 
+                                font-size: 4vw; 
+                                z-index: 10;   
+                                padding-top: .1%;                                  
+                            }                            
+                            .motor {
+                                background-color:rgb(255, 53, 53);                        
+                                width:45%;
+                                height: 28%;                
+                                float:left;                              
+                                box-sizing: border-box;                   
+                                margin: 3.5% 0 0 3.5%;
+                                border: 1px solid rgb(158, 158, 158);
+                                border-radius: 5px;
+                                /*padding:.5% 0 0 0;*/
+                                text-align: center;
+                                font-size: 1vw;
+                                color: white;
+                            }                              
+                
+                .gauges_main_container {
+                    background-color:rgb(17, 17, 17) ;               
+                    width:91.2%;
+                    height: 89.5%; 
+                    border: 1px rgb(94, 93, 93) solid;               
+                    float:left;                              
+                    box-sizing: border-box;
+                    padding: 0.2%;
+                }
+                    .meter_container {
+                        background-color:rgb(39, 39, 39) ;                          
+                        width:33%;
+                        height: 32.7%;                
+                        float:left;                              
+                        box-sizing: border-box;                   
+                        margin-right:0.3%;
+                        margin-bottom: 0.3%;
+                        border: 1px solid yellow;
+                        border-radius: 5px;
+                        padding:0.3% 0 0 .3%;
+                        user-select:none;
+                        
+                    } 
+                        .meter_label {
+                            width:fit-content;
+                            height:fit-content; 
+                            float:left;
+                            color:rgb(255, 0, 0);
+                            background-color: rgb(213, 235, 252);
+                            margin-bottom: .3%; 
+                            margin-right: 46%;                          
+                            text-align: left;
+                            font-size: .8vw;
+                            box-sizing: border-box;                            
+                            padding:0 .5% 0 .5%;
+                            border-bottom: 2px rgb(59, 59, 59) solid;
+                            border-right: 2px rgb(59, 59, 59) solid;
+                            border-radius: 3px;
+                        }
+                        .on {
+                            width:fit-content;
+                            height:fit-content; 
+                            float:right;
+                            border-radius: 5px;
+                            border:1px rgb(85, 85, 85) solid;
+                            text-align: center;
+                            font-size: .8vw;
+                            box-sizing: border-box;
+                            color:rgb(250, 246, 246);
+                            background-color: rgb(2, 226, 2);
+                            margin-bottom: .3%;
+                            margin-right: 1%;
+                            padding:0 .5% 0 .5%;
+                            opacity: 0.2;                                 
+                        }
+                        .off {
+                            width:fit-content;
+                            height:fit-content; 
+                            float: right;
+                            border-radius: 5px;
+                            text-align: center;
+                            font-size: .8vw;
+                            box-sizing: border-box;
+                            border:1px rgb(85, 85, 85) solid;
+                            color:rgb(250, 246, 246);
+                            background-color: rgb(238, 5, 5);
+                            margin-bottom: .3%;
+                            margin-right: 1%;
+                            padding:0 .5% 0 .5%;  
+                            opacity: 0.2;
+                        }
+                        .mode {
+                            width:fit-content;
+                            height:fit-content; 
+                            float: right;
+                            border-radius: 5px;
+                            text-align: center;
+                            font-size: .8vw;
+                            box-sizing: border-box;
+                            border:1px rgb(85, 85, 85) solid;
+                            color:rgb(250, 246, 246);
+                            background-color: rgb(23, 0, 230);
+                            margin-bottom: .3%;
+                            margin-right: 1%;
+                            padding:0 .5% 0 .5%;  
+                        } 
+                        .meter {
+                            float:left; 
+                            margin-left: 10%; 
+                        }                        
+                        #spinner-back, #spinner-front {
+                            position: fixed;
+                            width: 100vw;
+                            transition: all 1s;
+                            visibility: hidden;
+                            opacity: 0;
+                        }
+                        #spinner-back {
+                            z-index: 998;
+                            height: 100vh;
+                            background: rgba(0, 0, 0, 0.7);
+                        }
+                        #spinner-front {
+                            z-index: 999;
+                            color: #fff;
+                            text-align: center;
+                            margin-top: 50vh;
+                            transform: translateY(-50%);
+                        }
+                        #spinner-back.show, #spinner-front.show {
+                            visibility: visible;
+                            opacity: 1;
+                        } 
+                        
+                .charts_main_container {
+                    background-color:rgb(17, 17, 17) ;               
+                    width:91.2%;
+                    height: 89.5%; 
+                    border: 1px rgb(94, 93, 93) solid;               
+                    float:left;  
+                    display: none;                            
+                    box-sizing: border-box;
+                }
+
+                .motors_table {
+                    background-color:rgb(255, 255, 255) ;  
+                    color: rgb(0, 0, 0);             
+                    width:91.2%;
+                    height: 89.5%; 
+                    border: 1px rgb(77, 77, 77) solid;   
+                    border-collapse: collapse; 
+                    font-family: Calibri;           
+                    float:left;                
+                    display: none;                            
+                    box-sizing: border-box;                
+                    overflow-y:scroll; 
+                    table-layout: fixed;       
+                }                    
+                    th, td {
+                        width: 0.5%;
+                        border: 1px solid rgb(211, 210, 210);
+                        border-collapse: collapse;
+                        text-align: center; 
+                        box-sizing: border-box;
+                        padding-top: 0.5%;
+                        padding-bottom: 0.5%;                                     
+                    }
+                    th {
+                        background-color: rgb(203, 210, 216);
+                        position: sticky;                    
+                        top: 2.9%;
+                        border:1px solid rgb(145, 145, 145);
+                    }                    
+                    td {
+                        white-space:pre; 
+                    }
+
+            html, body {
+                    margin: 0;
+                    padding: 0;
+                }
+                                                             
+        </style>
+    </head>
+    <body> 
+        <div id="spinner-back"></div>
+        <div id="spinner-front">
+            <img src="ajax-loader.gif"/><br>
+            <p id = "spinner_text"></p>
+        </div> 
+        <div class = "yes_no" id = "yes_no_restart">
+            <div style="display: block; width: fit-content; height: fit-content; margin: auto; text-align: center; font-size: 1vw;" >Are you sure you want to restart halls?</div>
+            <div class = "yes" id = "yes_restart" onclick="restart_halls_req()">Yes</div>
+            <div class = "no" id = "no_restart" onclick="document.getElementById('yes_no_restart').style.display = 'none'">No</div>
+        </div>
+        <div class = "yes_no" id = "yes_no_enforce_sync">
+            <div style="display: block; width: fit-content; height: fit-content; margin: auto; text-align: center; font-size: 1vw;" >Are you sure you want to enforce halls to sync?</div>
+            <div class = "yes" id = "yes_enforce_sync" onclick="enforce_sync_req()">Yes</div>
+            <div class = "no" id = "no_enforce_sync" onclick="document.getElementById('yes_no_enforce_sync').style.display = 'none'">No</div>
+        </div>
+
+        <div class = "yes_no" id = "yes_no_update">
+            <div style="display: block; width: fit-content; height: fit-content; margin: auto; text-align: center; font-size: 1vw;" >Are you sure you want to update halls?</div>
+            <div class = "yes" id = "yes_update" onclick="update_halls_req()">Yes</div>
+            <div class = "no" id = "no_update" onclick="document.getElementById('yes_no_update').style.display = 'none'">No</div>
+        </div>
+        <div class = "yes_no" id = "yes_no_update_gateway">
+            <div style="display: block; width: fit-content; height: fit-content; margin: auto; text-align: center; font-size: 1vw;" >Are you sure you want to update Gateway?</div>
+            <div class = "yes" id = "yes_update_gateway" onclick="update_gateway_req()">Yes</div>
+            <div class = "no" id = "no_update_gateway" onclick="document.getElementById('yes_no_update_gateway').style.display = 'none'">No</div>
+        </div>
+        <div class = "user_name" id = "user_name">
+            <div class = "logo"></div>
+            <div class = "logo_text" >Please, enter your Pin</div>
+            <input class = "password" type="password" id="pwd" name="pwd" minlength="8" required = "true" autofocus = "on">
+            <button onclick="read_pw()" style = "margin-left: 32%; font-size: .9vw;border-radius: 15px;
+             background-color: rgb(29, 170, 59); box-shadow: 1px 2px 5px #000000; color: white; height: 15%; width: 30%;">Log in</button>
+        </div> 
+          
+        <div class = "mask" id = "mask"></div>
+          
+        <div class ="project_main_container">
+            <div class = "req_config_panel" id = "req_config_panel">
+                <a id = "a" href="#" style="text-decoration: none;  transition: 0.3s;color: rgb(151, 151, 151); position: absolute; top: 0; right: 4%; font-size: 1.7vw;"
+                 onclick="document.getElementById('req_config_panel').style.width = '0%';">&times;</a>
+                 <div class = "gateway_halls_files" id = "gateway_files">
+                     <div class = "files" id = "G_f" style = "padding-top: 2%; background-color: rgb(226, 33, 33); text-align: center; color:#ffffff">Gateway Files</div>
+                     <a href="#" class = "files" id = "Py4_Gateway.py" onclick="firmware_files_req('G', id)">Py4_Gateway.py</a>
+                     <a href="#" class = "files" id = "clients.py" onclick="firmware_files_req('G', id)">clients.py</a>
+                     <a href="#" class = "files" id = "constants_pi4.py" onclick="firmware_files_req('G', id)">constants_pi4.py</a>
+                     <a href="#" class = "files" id = "GATEWAY.py" onclick="firmware_files_req('G', id)">GATEWAY.py</a>
+                     <a href="#" class = "files" id = "network_config.py" onclick="firmware_files_req('G', id)">network_config.py</a>
+                     <a href="#" class = "files" id = "pfms.py" onclick="firmware_files_req('G', id)">pfms.py</a>                     
+                     <a href="#" class = "files" id = "public_param.py" onclick="firmware_files_req('G', id)">public_param.py</a>
+                 </div>
+
+                 <div class = "gateway_halls_files" id = "halls_files">
+                    <div class = "files" id = "H_f" style = "padding-top: 2%; background-color: rgb(226, 33, 33); text-align: center; color: #ffffff">Halls Files</div>
+                     <a href="#" class = "files" id = "main.py" onclick="firmware_files_req('H', id)">main.py</a>
+                     <a href="#" class = "files" id = "config.py" onclick="firmware_files_req('H', id)">config.py</a>
+                     <a href="#" class = "files" id = "constants_pico.py" onclick="firmware_files_req('H', id)">constants_pico.py</a>
+                     <a href="#" class = "files" id = "node_id.py" onclick="firmware_files_req('H', id)">node_id.py</a>
+                     <a href="#" class = "files" id = "Hpfms.py" onclick="firmware_files_req('H', 'pfms.py')">pfms.py</a>
+                     <a href="#" class = "files" id = "Hpublic_param.py" onclick="firmware_files_req('H', 'public_param.py')">public_param.py</a>
+                     <a href="#" class = "files" id = "sensors.py" onclick="firmware_files_req('H', id)">sensors.py</a>                     
+                 </div>
+            </div>
+
+            <div id="alarm_panel">
+                <div onclick="change_alarm_panel('alarm', 'none')" style = "box-shadow: 4px 6px 9px 1px #1f1f1ff1;; border-radius: 5px; 
+                background-color: #fa7147; box-sizing: border-box; padding: 1% 5% 2% 5%; margin-bottom: 3%; font-size: 1.2vw; font-family:cursive; 
+                color:rgb(15, 0, 218);position: relative; left: 21%; height: fit-content; width: fit-content">Alarm Message</div>
+                <div id = "alarm_panel_text" style = "overflow-y:scroll; 
+                background-color: rgba(253, 248, 170, 0.1); color: #db0000; position: relative; height: 92%; width: 100%"></div>
+            </div>
+
+            <div class = "title" id = "title" onclick="fullScreen()">Poultry Farm Smart Management System</div>           
+            
+            <div class = "zone_container" id = "zone_container">                       
+                <div class = "zone_button" id = "zone"></div>
+                <div class = "hall_button" id = "hall"></div> 
+                <div class = "conn_server_panel" id = "conn_server_panel">------------------------------</div>                
+                <div class = "system_clock" id = "system_clock"></div>
+                <div class = "system_state" id = "system_state"></div>                                           
+                <div class = "alarm" id = "alarm" onmousemove="change_alarm_panel(id, 'unset')">ALARM</div>                  
+                <div class = "messages" id = "messages"></div>
+                <div class = "readings_time_stamp" id = "readings_time_stamp"></div>
+                <div class = "system_state" id = "meter_R" style="font-size: 1.6vw; padding-top: .1%; margin-right: 13%; display: none">Meter</div>
+
+                <button class = "display_table_button" id = "display_motors_table_button" onclick = "displayTable('motors_table')">Motors table</button> 
+                <button class = "display_table_button" id = "display_environment_table_button" onclick = "displayTable('environment_table');">Environment table</button>                 
+                <button class = "download_table_button" id = "download_table_button" onclick="exportToExcel()">Download table</button>  
+
+                <button class = "motor_button" id = "Humidifiers" onclick="show_line_charts(id, 6)">Humidifiers</button>   
+                <button class = "motor_button" id = "Coolers" onclick="show_line_charts(id, 5)">Coolers</button>
+                <button class = "motor_button" id = "Continuous extractors" onclick="show_line_charts(id, 4)">Continuous extractors</button>
+                <button class = "motor_button" id = "Cold air extractors" onclick="show_line_charts(id, 3)">Cold air extractors</button>        
+                <button class = "motor_button" id = "Feeding lines" onclick="show_line_charts(id, 2)">Feeding Lines</button>
+                <button class = "motor_button" id = "Feeding motors" onclick="show_line_charts(id, 1)">Feeding motors</button> 
+            </div>
+
+            <div class = "panel" id = "panel">
+                <div class = "user_login" id = "user_login"></div>
+                <div class = "data_type_container">
+                    <div style = "margin-bottom:5%; text-align: center;">Please, choose your data type</div>
+                    <div style="margin-bottom: 5%;">                           
+                        <input type="radio" id="rtd_radio" name="data_type" value="RTD_RADIO" style = "width: 15%;" onclick="control_selection(value)" checked="true">RTD<br>      
+                        <input type="radio" id="ltd_radio" name="data_type" value="LTD_RADIO" style = "width: 15%;" onclick="control_selection(value)" >LTD<br>  
+                        <input type="radio" id="hcs_radio" name="data_type" value="HCS_RADIO" style = "width: 15%;" onclick="control_selection(value)" >HCS<br> 
+                        <input type="radio" id="alarm_radio" name="data_type" value="ALARM_RADIO" style = "width: 15%;" onclick="control_selection(value)" >Alarm data<br>                   
+                        <input type="radio" id="htd_radio" name="data_type" value="HTD_RADIO" style = "width: 15%;" onclick="control_selection(value)">History data<br>
+                        <input type="radio" id="sd_radio" name="data_period" value="SD_RADIO" onclick="control_selection(value)" disabled = "true" style = "width: 15%; margin-left: 15%">Single day<br>
+                        <input type="radio" id="md_radio" name="data_period" value="MD_RADIO" onclick="control_selection(value)" disabled = "true" style = "width: 15%; margin-left: 15%">Data period
+                    </div> 
+                    <div style = "border-radius: 3px; background-color: aqua; padding:1% 1% 1% 1%; height: fit-content;">
+                        <input type="date" id="sd_date" name="data_type" disabled = "true" style = "position: relative; width: 97%; height:50%; background-color: rgb(54, 54, 54);
+                        color:rgb(229, 255, 0); font-size: 0.7vw; text-align: center; padding:0; border-radius: 3px; margin-bottom: 1%;"> 
+                        <input type="date" id="md_date" name="data_type" disabled = "true" style = "position: relative; width: 97%; height:50%; background-color: rgb(54, 54, 54);
+                        color:rgb(229, 255, 0); font-size: 0.7vw; text-align: center; padding:0; border-radius: 3px"> 
+                    </div>        
+                    <form id="z_h_form">
+                        <select class = "zone_selections" id = "z_selection"> 
+                            <option class = "zone_option"  value ="0">------------</option>    
+                            <option class = "zone_option" value ="1">Zone_1</option>   
+                            <option class = "zone_option" value ="2">Zone_2</option> 
+                            <option class = "zone_option" value ="3">Zone_3</option> 
+                            <option class = "zone_option" value ="4">Zone_4</option> 
+                            <option class = "zone_option" value ="5">Zone_5</option> 
+                            <option class = "zone_option" value ="6">Zone_6</option>          
+                        </select> 
+                        <select class = "hall_selections" id="h_selection">
+                            <option class = "hall_option" value ="0">------------</option>
+                            <option class = "hall_option" value ="1">Hall_1</option>
+                            <option class = "hall_option" value ="2">Hall_2</option>
+                            <option class = "hall_option" value ="3">Hall_3</option>
+                            <option class = "hall_option" value ="4">Hall_4</option>
+                            <option class = "hall_option" value ="5">Hall_5</option>
+                            <option class = "hall_option" value ="6">Hall_6</option>
+                            <option class = "hall_option" value ="7">Hall_7</option>
+                            <option class = "hall_option" value ="8">Hall_8</option>
+                            <option class = "hall_option" value ="9">Hall_9</option>
+                            <option class = "hall_option" value ="10">Hall_10</option>
+                            <option class = "hall_option" value ="11">Hall_11</option>
+                            <option class = "hall_option" value ="12">Hall_12</option>
+                            <option class = "hall_option" value ="13">Hall_13</option>
+                            <option class = "hall_option" value ="14">Hall_14</option>
+                            <option class = "hall_option" value ="15">Hall_15</option>
+                            <option class = "hall_option" value ="16">Hall_16</option>
+                            <option class = "hall_option" value ="17">Hall_17</option>
+                            <option class = "hall_option" value ="18">Hall_18</option>
+                            <option class = "hall_option" value ="19">Hall_19</option>
+                            <option class = "hall_option" value ="20">Hall_20</option>            
+                        </select>
+                    </form>
+                </div>
+                <button class = "button" id="data_button" type="button" onclick="request_data_from_server()">Submit</button> 
+                
+                <div class = "main_switching_container" id = "main_switching_container">
+                    <div style = "width: 100%; height: 1%; margin-bottom: 3%; border-bottom: 1px solid rgb(216, 216, 216);"></div>
+                    <!--<div style = "width: 100%; height: 1%; margin-bottom: 3%; border-bottom: 1px solid rgb(216, 216, 216);"></div>
+                    <div style = "width: 100%; height: 1%; border-bottom: 1px solid rgb(216, 216, 216);"></div>-->
+                    <div id = "update_halls_container">
+                        <button class = "update_halls" type = "button" id = "update_halls" onclick="$('#yes_no_update').slideDown('slow')">Update Halls</button> 
+                        <button class = "update_halls" type = "button" id = "restart_halls" onclick="$('#yes_no_restart').slideDown('slow')" style = "margin-top: 3%;">Restart Halls</button> 
+                        <button class = "update_halls" type = "button" id = "update_gateway" onclick="$('#yes_no_update_gateway').slideDown('slow')" style = "margin-top: 3%;">Update Gateway</button> 
+                        <button class = "update_halls" type = "button" id = "req_firmware_files" onclick="document.getElementById('req_config_panel').style.width = '24%'"  style = "margin-top: 3%;">Req Net Param</button> 
+                        <button class = "update_halls" type = "button" id = "enforce_sync" onclick="$('#yes_no_enforce_sync').slideDown('slow')" style = "margin-top: 3%;">Enforce Sync</button> 
+
+                    </div>
+                    <div class = "switching_container" id = "switching_container">
+                        <div style = "margin-bottom:5%; text-align: center;">Please, choose zone & hall</div>
+                        <div style="margin-bottom: 5%;">     
+                            <input type="radio" id="mode_manual" name="data_type" value="MANUAL" onclick="control_selection(value)" style = "width: 15%;">Manual<br>       
+                            <input type="radio" id="switch_on_radio" name="manual_switching" value="SWITCH_ON" onclick="control_selection(value)" disabled = "true" style = "width: 15%;margin-left: 15%;">Switch ON<br>
+                            <input type="radio" id="switch_off_radio" name="manual_switching" value="SWITCH_OFF" onclick="control_selection(value)" disabled = "true" style = "width: 15%;margin-left: 15%;">Switch OFF<br>                        
+                            <input type="radio" id="auto_switch" name="data_type" value="AUTO" onclick="control_selection(value)" style = "width: 15%;">Auto<br>                        
+
+                        </div>      
+                        <form id="switching_form">
+                            <select class = "zone_selections" id = "z_switching_selection"> 
+                                <option class = "zone_option"  value ="0">------------</option>    
+                                <option class = "zone_option" value ="1">Zone_1</option>   
+                                <option class = "zone_option" value ="2">Zone_2</option> 
+                                <option class = "zone_option" value ="3">Zone_3</option> 
+                                <option class = "zone_option" value ="4">Zone_4</option> 
+                                <option class = "zone_option" value ="5">Zone_5</option> 
+                                <option class = "zone_option" value ="6">Zone_6</option>          
+                            </select> 
+                            <select class = "hall_selections" id="h_switching_selection">
+                                <option class = "hall_option" value ="0">------------</option>
+                                <option class = "hall_option" value ="1">Hall_1</option>
+                                <option class = "hall_option" value ="2">Hall_2</option>
+                                <option class = "hall_option" value ="3">Hall_3</option>
+                                <option class = "hall_option" value ="4">Hall_4</option>
+                                <option class = "hall_option" value ="5">Hall_5</option>
+                                <option class = "hall_option" value ="6">Hall_6</option>
+                                <option class = "hall_option" value ="7">Hall_7</option>
+                                <option class = "hall_option" value ="8">Hall_8</option>
+                                <option class = "hall_option" value ="9">Hall_9</option>
+                                <option class = "hall_option" value ="10">Hall_10</option>
+                                <option class = "hall_option" value ="11">Hall_11</option>
+                                <option class = "hall_option" value ="12">Hall_12</option>
+                                <option class = "hall_option" value ="13">Hall_13</option>
+                                <option class = "hall_option" value ="14">Hall_14</option>
+                                <option class = "hall_option" value ="15">Hall_15</option>
+                                <option class = "hall_option" value ="16">Hall_16</option>
+                                <option class = "hall_option" value ="17">Hall_17</option>
+                                <option class = "hall_option" value ="18">Hall_18</option>
+                                <option class = "hall_option" value ="19">Hall_19</option>
+                                <option class = "hall_option" value ="20">Hall_20</option>            
+                            </select>
+                            <select class = "hall_selections" id = "m_switching_selection"> 
+                                <option class = "motor_option"  value ="0">------------</option>    
+                                <option class = "motor_option" value ="1">Feeding motor</option>   
+                                <option class = "motor_option" value ="2">Feeding lines</option> 
+                                <option class = "motor_option" value ="3">C. A. extractor</option> 
+                                <option class = "motor_option" value ="4">Cont. extractor</option> 
+                                <option class = "motor_option" value ="5">Coolers</option> 
+                                <option class = "motor_option" value ="6">Humidifiers</option>
+                                <option class = "motor_option" value ="100">All motors</option>          
+                            </select> 
+                        </form> 
+                    </div>
+                    <button class = "button switching_button" id = "switching_button" type="button" onclick="switch_on_off_req()" disabled="true">Submit</button>
+                </div>                      
+            </div>
+
+<!--   ///////////////////////////////////////Page 1 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+            <div class = "hall_current_state_main_container" id = "hall_current_state_main_container">
+                <div class = "zone" id = "zone1">
+                    <div class = "zone_label">Zone_1</div>
+                </div>
+                <div class = "zone" id = "zone2">
+                    <div class = "zone_label">Zone_2</div>
+                </div>
+                <div class = "zone" id = "zone3">
+                    <div class = "zone_label">Zone_3</div>
+                </div>
+                <div class = "zone" id = "zone4">
+                    <div class = "zone_label">Zone_4</div>
+                </div>
+                <div class = "zone" id = "zone5">
+                    <div class = "zone_label">Zone_5</div>
+                </div>
+                <div class = "zone" id = "zone6">
+                    <div class = "zone_label">Zone_6</div>
+                </div>                
+            </div>
+
+<!--   ///////////////////////////////////////Page 2 ////////////////////////////////-->
+
+            <div class = "gauges_main_container" id = "gauges_main_container">
+                <div class = "meter_container">
+                    <div class = "meter_label">Feeding Motors</div>            
+                    <div class = "off" id = "f_m_off">OFF</div>
+                    <div class = "on" id = "f_m_on">ON</div>
+                    <div class = "mode" id = "f_m_mode">AUTO</div>
+                    <div class = "meter" id="f_m_current_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>                                        
+                    <div class = "meter" id="f_m_voltage_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_m_power_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_m_energy_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_m_power_factor_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_m_frequency_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                </div>            
+                <div class = "meter_container">
+                    <div class = "meter_label">Feeding Lines</div>
+                    <div class = "off" id = "f_l_off">OFF</div>
+                    <div class = "on" id = "f_l_on">ON</div>  
+                    <div class = "mode" id = "f_l_mode">AUTO</div>          
+                    <div class = "meter" id="f_l_current_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_l_voltage_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_l_power_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_l_energy_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_l_power_factor_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="f_l_frequency_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                </div>
+                <div class = "meter_container">
+                    <div class = "meter_label">Cold Air Extractors</div>            
+                    <div class = "off" id = "c_a_e_off">OFF</div>
+                    <div class = "on" id = "c_a_e_on">ON</div>
+                    <div class = "mode" id = "c_a_e_mode">AUTO</div>
+                    <div class = "meter" id="c_a_e_current_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_a_e_voltage_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_a_e_power_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_a_e_energy_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_a_e_power_factor_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_a_e_frequency_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                </div>
+                <div class = "meter_container">
+                    <div class = "meter_label">Continuous extractors</div>            
+                    <div class = "off" id = "c_e_off">OFF</div>
+                    <div class = "on" id = "c_e_on">ON</div>
+                    <div class = "mode" id = "c_e_mode">AUTO</div>
+                    <div class = "meter" id="c_e_current_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_e_voltage_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_e_power_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_e_energy_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_e_power_factor_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_e_frequency_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                </div>
+                <div class = "meter_container">
+                    <div class = "meter_label">Coolers</div>            
+                    <div class = "off" id = "c_off">OFF</div>
+                    <div class = "on" id = "c_on">ON</div>
+                    <div class = "mode" id = "c_mode">AUTO</div>
+                    <div class = "meter" id="c_current_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_voltage_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_power_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_energy_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_power_factor_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="c_frequency_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                </div>
+                <div class = "meter_container">
+                    <div class = "meter_label">Humidifiers</div>            
+                    <div class = "off" id = "h_off">OFF</div>
+                    <div class = "on" id = "h_on">ON</div>
+                    <div class = "mode" id = "h_mode">AUTO</div>
+                    <div class = "meter" id="h_current_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="h_voltage_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="h_power_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="h_energy_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="h_power_factor_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>
+                    <div class = "meter" id="h_frequency_div" onmousemove="change_alarm_panel(id, 'unset')" onmouseout="change_alarm_panel(id, 'none')"></div>            
+                </div>            
+                <div class = "meter_container" style = "padding-top:1.4%;padding-bottom:1%;padding-left:3%"> 
+                        <canvas class = "meter" id = "linear_gauge" onmousemove="change_alarm_panel(id, 'unset')"  onmouseout="change_alarm_panel(id, 'none')"
+                            data-width="120"
+                            data-height="230" 
+                            data-type="linear-gauge"
+                            data-title="Temperature"
+                            data-color-title = "red"
+                            data-units="°C"
+                            data-font-numbers = "8"
+                            data-color-numbers="blue"
+                            data-border-radius="10"
+                            data-ticks-width="15"
+                            data-ticks-width-minor="7.5"
+                            data-color-needle="#ff0000"
+                            data-minor-ticks="2"
+                            data-min-value="-10"
+                            data-max-value="70"
+                            data-major-ticks="-10,0,10,20,30,40,50,60,70"
+                            data-bar-width="20"
+                            data-needle-width="3"
+                            data-bar-begin-circle="false" 
+                            data-color-bar-progress="#ff0000" 
+                            data-borders="true"
+                            data-border-shadow-width="20"
+                            data-value-int="2"
+                            data-value-dec="1"                
+                            data-highlights='[{"from": -10, "to": 14, "color": "rgba(0, 0, 255, .5)"},
+                                            {"from": 10, "to": 40, "color": "rgba(0, 179, 0, .5)"}, {"from": 40, "to": 70, "color": "rgba(255, 0, 0, .5)"}]'>
+                        </canvas> 
+                    
+                        <canvas class = "meter" style = "margin-left: 15%; margin-top: 3%;" id = "radial_gauge" onmousemove="change_alarm_panel(id, 'unset')"  onmouseout="change_alarm_panel(id, 'none')"
+                            data-type="radial-gauge"
+                            data-width="180"
+                            data-height="180"
+                            data-units="%"
+                            data-title="Humidity"
+                            data-color-title="white"
+                            data-color-units="white"
+                            data-font-units="10"
+                            data-font-numbers="10"
+                            data-color-numbers="#d9d9d9"
+                            data-min-value="0"
+                            data-max-value="100"
+                            data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+                            data-color-major-ticks = "white"
+                            data-minor-ticks="2"
+                            data-color-minor-ticks= "#white"
+                            data-stroke-ticks="true"
+                            data-highlights='[{"from": 0, "to": 30, "color": "rgba(230, 184, 0, .65)"}, {"from": 30, "to": 60, "color": "rgba(0, 153, 0, .65)"},
+                            {"from": 60, "to": 90, "color": "rgba(102, 255, 224, .65)"}, {"from": 90, "to": 100, "color": "rgba(128, 170, 255, .65)"}]'
+                            data-color-plate="#00004d"
+                            data-borders="false"
+                            data-needle-type="arrow"
+                            data-needle-width="5"
+                            data-needle-circle-size="7"
+                            data-needle-circle-outer="true"
+                            data-needle-circle-inner="false"
+                            data-animation-duration="5000"
+                            data-animation-rule="linear"
+                            data-animate-on-init="true"
+                            data-animated-value="true"                
+                            data-value-box="true"
+                            data-value-box-border-radius="1"
+                            data-value-int="2"
+                            data-value-dec="1">
+                        </canvas>
+                </div>
+                <div class = "meter_container" id = "spare1_meter_reading" style="padding-top: 4%; text-align: center; font-size: 5vw; color: #a1ffff28;">Spare1</div>
+                <div class = "meter_container" id = "spare2_meter_reading" style="padding-top: 4%; text-align: center; font-size: 5vw; color: #a1ffff28;">Spare2</div>                     
+            </div>        
+
+<!--   ///////////////////////////////////////Page 3 ////////////////////////////////-->           
+
+            <div class = "charts_main_container" id = "charts_main_container">
+                <div class = "meter_container" id = "line_chart_current" onclick = "enlarge_line_chart(1)"></div>
+                <div class = "meter_container" id = "line_chart_voltage" onclick = "enlarge_line_chart(2)"></div>
+                <div class = "meter_container" id = "line_chart_power" onclick = "enlarge_line_chart(3)"></div>
+                <div class = "meter_container" id = "line_chart_energy" onclick = "enlarge_line_chart(4)"></div>
+                <div class = "meter_container" id = "line_chart_power_factor" onclick = "enlarge_line_chart(5)"></div>
+                <div class = "meter_container" id = "line_chart_frequency" onclick = "enlarge_line_chart(6)"></div>
+                <div class = "meter_container" id = "line_chart_spare1" onclick = "enlarge_line_chart(7)"></div>
+                <div class = "meter_container" id = "line_chart_spare2" onclick = "enlarge_line_chart(8)"></div>
+                <div class = "meter_container" id = "line_chart_spare3" onclick = "enlarge_line_chart(9)"></div>
+            </div> 
+ <!--   ///////////////////////////////////////Page 4 ////////////////////////////////--> 
+
+         <!--<div class = "table_main_container" id = "table_main_container">--> 
+            
+            <table class = "motors_table" id = "motors_table">
+            <thead>
+                <caption style = "text-shadow: 1px 1px 1px #e9e9e9; color: rgb(255, 0, 0); font-size: 20px; position: sticky; top: 0; background-color: black; text-align: left; height: 2%;">Motors Performance Data</caption>
+                <tr>
+                    <th>id</th>
+                    <th>Zone_id</th>
+                    <th>Hall_id</th>
+                    <th>Motor_id</th>
+                    <th>Motor_state</th>
+                    <th>Operation_mode</th>
+                    <th>Voltage</th>
+                    <th>Current</th>                   
+                    <th>Power</th>
+                    <th>Energy</th>
+                    <th>Power_factor</th>
+                    <th>Frequency</th>
+                    <th>Date_time</th>                            
+                </tr>
+            </thead>
+            <tbody>
+                                    
+            </tbody>
+            <tfoot>
+                
+            </tfoot>            
+        
+        </table>
+
+        <table class = "motors_table" id = "environment_table">
+            <caption style = "text-shadow: 1px 1px 1px#e9e9e9; color: rgb(255, 0, 0); font-size: 20px; position: sticky; top: 0; background-color: black; text-align: left; height: 2%;">Environment Conditions Data</caption>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Zone_id</th>
+                    <th>Hall_id</th>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>Air quality</th>                           
+                    <th>Date_time</th>                            
+                </tr>
+            </thead>
+            <tbody>
+                                    
+            </tbody>
+            <tfoot>
+                
+            </tfoot>            
+        
+        </table>
+
+        <table class = "motors_table" id = "alarm_table">
+            <caption style = "text-shadow: 1px 1px 1px#e9e9e9; color: rgb(255, 0, 0); font-size: 20px; position: sticky; top: 0; background-color: black; text-align: left; height: 2%;">Alarm Data</caption>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Zone_id</th>
+                    <th>Hall_id</th>
+                    <th>Alarm Details</th>                                              
+                    <th>Date_time</th>                            
+                </tr>
+            </thead>
+            <tbody>
+                                    
+            </tbody>
+            <tfoot>
+                
+            </tfoot>            
+        
+        </table>
+         
+        
+        </div> 
+    </body>
+</html>
